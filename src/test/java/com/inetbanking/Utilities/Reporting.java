@@ -15,6 +15,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class Reporting extends TestListenerAdapter{
@@ -24,32 +25,37 @@ public class Reporting extends TestListenerAdapter{
 	
 	
 	
-public void onStart(ITestResult tr) {
+public void onStart(ITestContext testContext) {
 	
 	String timestamp =new SimpleDateFormat("yyyy.MM.dd.hh.mm.ss").format(new Date());
 	String repName="Test-Report_"+timestamp+".html";
-	System.out.println("repName");
+	
 	htmlReporter =new ExtentHtmlReporter(System.getProperty("user.dir")+"/test-output/"+repName);
-	htmlReporter.loadConfig(System.getProperty("user.dir")+"/extent_Config.xml");
+	htmlReporter.loadConfig(System.getProperty("user.dir")+"/extent-config.xml");
 	extent=new ExtentReports();
 	extent.attachReporter(htmlReporter);
 	extent.setSystemInfo("Host Name", "localhost");
+	extent.setSystemInfo("Environment", "QA");
+	extent.setSystemInfo("user", "Sachin");
+	
 	htmlReporter.config().setDocumentTitle("InetBankinkProject");
+	htmlReporter.config().setReportName("Functional test report");
+	htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
 	htmlReporter.config().setTheme(Theme.DARK);
 	
 
 }
-public void OnTestSucess(ITestResult tr) {
+public void onTestSucess(ITestResult tr) {
 	logger = extent.createTest(tr.getName());
 	logger.log(Status.PASS,MarkupHelper.createLabel(tr.getName(),ExtentColor.GREEN));
 }
 	
 	
 
-public void OnTestFailure(ITestResult tr) {
+public void onTestFailure(ITestResult tr) {
 	logger = extent.createTest(tr.getName());
 	logger.log(Status.FAIL,MarkupHelper.createLabel(tr.getName(),ExtentColor.RED));
-	String screenShotPath =System.getProperty("user.dir")+"\\Screenshots\\"+tr.getName()+".png";
+	String screenShotPath = System.getProperty("user.dir")+"\\Screenshots\\"+tr.getName()+".png";
 	
 	File f=new File(screenShotPath);
 	if(f.exists()) {
@@ -62,7 +68,7 @@ public void OnTestFailure(ITestResult tr) {
 	}
 	
 	}
-public void OnTestSkipped(ITestResult tr) {
+public void onTestSkipped(ITestResult tr) {
 	logger = extent.createTest(tr.getName());
 	logger.log(Status.SKIP,MarkupHelper.createLabel(tr.getName(),ExtentColor.ORANGE));
 }

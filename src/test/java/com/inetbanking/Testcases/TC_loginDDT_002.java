@@ -2,6 +2,7 @@ package com.inetbanking.Testcases;
 
 import java.io.IOException;
 
+
 import org.openqa.selenium.NoAlertPresentException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -15,10 +16,9 @@ public class TC_loginDDT_002 extends BaseClass {
 	
 	public String k;
 	@Test(dataProvider="loginData")
-	public void loginDDT(String user, String pwd) throws IOException {
+	public void loginDDT(String user, String pwd) throws IOException, InterruptedException {
 		
 		
-	
 		
 		loginPage lp=new loginPage(driver);
 		logger.info("Url is opened");
@@ -29,7 +29,7 @@ public class TC_loginDDT_002 extends BaseClass {
 		lp.clicksubmit();
 	
 		if (isAlertPresent()==true) {
-
+			
 			driver.switchTo().alert().accept();
 			driver.switchTo().defaultContent();
 			Assert.assertTrue(false);
@@ -39,6 +39,10 @@ public class TC_loginDDT_002 extends BaseClass {
 			Assert.assertTrue(true);
 			
 			lp.ClickLogout();
+			driver.switchTo().alert().accept();
+			driver.switchTo().defaultContent();
+			
+	
 		}
 		
 		
@@ -48,8 +52,10 @@ public class TC_loginDDT_002 extends BaseClass {
 	public boolean isAlertPresent() throws IOException {
 		
 		try {
+			
+		
 			driver.switchTo().alert();
-			capturescreen(driver,"user");
+		
 			return true;
 		}
 	catch(NoAlertPresentException e) {
@@ -80,5 +86,7 @@ public class TC_loginDDT_002 extends BaseClass {
 		return loginData;
 		
 	}
+	
 
+	
 }
