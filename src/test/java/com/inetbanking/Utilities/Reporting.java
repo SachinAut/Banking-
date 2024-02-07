@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.testng.ITestContext;
+import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
@@ -18,7 +19,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
-public class Reporting extends TestListenerAdapter{
+public class Reporting implements ITestListener{
 	public ExtentHtmlReporter htmlReporter;
 	public ExtentReports extent;
 	public ExtentTest logger;
@@ -45,7 +46,7 @@ public void onStart(ITestContext testContext) {
 	
 
 }
-public void onTestSucess(ITestResult tr) {
+public void onTestSuccess(ITestResult tr) {
 	logger = extent.createTest(tr.getName());
 	logger.log(Status.PASS,MarkupHelper.createLabel(tr.getName(),ExtentColor.GREEN));
 }

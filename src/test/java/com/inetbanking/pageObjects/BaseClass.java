@@ -10,6 +10,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -41,7 +42,8 @@ public class BaseClass {
 		
 		if(br.equals("chrome")) {
 		System.setProperty("webdriver.chrome.driver",rc.getchromepath());
-		driver=new ChromeDriver(); 
+		ChromeOptions options=new ChromeOptions();
+		driver=new ChromeDriver(options); 
 		}
 		else if(br.equals("ie")) {
 			System.setProperty("webdriver.ie.driver",rc.getiepath());

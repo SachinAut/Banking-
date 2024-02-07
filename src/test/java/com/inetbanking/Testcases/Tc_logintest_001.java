@@ -14,9 +14,10 @@ public class Tc_logintest_001 extends BaseClass{
 	public void Logintest() throws IOException
 	{
 		
-	logger.info("URL is Opened");
+		logger.info("URL is Opened");
 		
 		loginPage lp= new loginPage(driver);
+		
 		lp.setusername(username);
 		logger.info("Username Entered");
 		lp.setpassward(passward);

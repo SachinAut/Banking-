@@ -14,7 +14,9 @@
   <parameter name="browser" value="chrome"></parameter>
     <classes>
    
-       <class name="com.inetbanking.Testcases.TC_loginDDT_002"/>
+  
+              <class name="com.inetbanking.Testcases.TC_addNewCustomer_003"/>
+       
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

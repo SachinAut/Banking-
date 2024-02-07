@@ -14,7 +14,7 @@ import com.inetbanking.pageObjects.loginPage;
 
 public class TC_loginDDT_002 extends BaseClass {
 	
-	public String k;
+	
 	@Test(dataProvider="loginData")
 	public void loginDDT(String user, String pwd) throws IOException, InterruptedException {
 		
@@ -29,11 +29,11 @@ public class TC_loginDDT_002 extends BaseClass {
 		lp.clicksubmit();
 	
 		if (isAlertPresent()==true) {
-			
+			logger.info("Test case Fail");
 			driver.switchTo().alert().accept();
 			driver.switchTo().defaultContent();
 			Assert.assertTrue(false);
-			
+			logger.info("Test case Fail");
 		}
 		else {
 			Assert.assertTrue(true);
@@ -41,7 +41,7 @@ public class TC_loginDDT_002 extends BaseClass {
 			lp.ClickLogout();
 			driver.switchTo().alert().accept();
 			driver.switchTo().defaultContent();
-			
+			logger.info("Test case Pass");
 	
 		}
 		
